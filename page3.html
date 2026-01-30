@@ -16,7 +16,12 @@
         <style>
             body:has(:not(:defined)) {
                 opacity: 0;
-                transition: opacity 0s 100ms;
+                animation: showBody 0s linear 100ms forwards;
+            }
+            @keyframes showBody {
+                to {
+                    opacity: 1;
+                }
             }
         </style>
     </head>
@@ -38,9 +43,15 @@
         </nav>
         <main>
             <h1>Without FOUC - Injection</h1>
-            <p>When the "Add Select Component" button is clicked, it will inject a Select component on the page. This is to demonstrate the behavior when new undefined components are added after the intial load.</p>
+            <p>
+                When the "Add Select Component" button is clicked, it will
+                inject a Select component on the page. This is to demonstrate
+                the behavior when new undefined components are added after the
+                intial load.
+            </p>
             <sl-button id="add-select-btn">Add Select Component</sl-button>
-            <hr>
+            <some-element></some-element>
+            <hr />
             <div id="dynamic-content"></div>
             <script>
                 document

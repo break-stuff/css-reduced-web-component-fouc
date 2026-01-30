@@ -8,12 +8,17 @@ When using Web Components (especially when lazy-loaded from a CDN), there's ofte
 
 ## The Solution
 
-A simple 4-line CSS snippet that hides the page until all custom elements are defined:
+A simple CSS snippet that hides the page until all custom elements are defined:
 
 ```css
 body:has(:not(:defined)) {
     opacity: 0;
-    transition: opacity 0s 100ms;
+    animation: showBody 0s linear 100ms forwards;
+}
+@keyframes showBody {
+    to {
+        opacity: 1;
+    }
 }
 ```
 
@@ -25,7 +30,8 @@ https://break-stuff.github.io/css-reduced-web-component-fouc/
 1. **`:not(:defined)`** - Selects any custom elements that haven't been defined yet
 2. **`body:has(...)`** - Checks if the body contains any undefined elements
 3. **`opacity: 0`** - Hides the entire page while custom elements are loading
-4. **`transition: opacity 0s 100ms`** - Adds a 100ms delay before showing as a fallback in case there is a delay or problem defining your components. This can be configured to meet your needs. An important note is that visual appeal can be assessed within 50ms by a user, so try not to go crazy.
+4. **`animation: showBody 0s linear 100ms forwards`** - Applies an animation with a 100ms delay before showing the page. This prevents a flash on fast connections while ensuring the page displays even if there's a delay in loading components
+5. **`@keyframes showBody`** - Defines the animation that transitions opacity back to 1
 
 Once all custom elements are registered, the `:not(:defined)` selector no longer matches anything, the `body:has()` condition becomes false, and the page becomes visible.
 

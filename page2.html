@@ -14,10 +14,15 @@
             src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"
         ></script>
         <style>
-            body:has(:not(:defined)) {
-                opacity: 0;
-                transition: opacity 0s 100ms;
+        body:has(:not(:defined)) {
+            opacity: 0;
+            animation: showBody 0s linear 100ms forwards;
+        }
+        @keyframes showBody {
+            to {
+                opacity: 1;
             }
+        }
         </style>
     </head>
     <body>
@@ -28,7 +33,7 @@
         </nav>
         <main>
             <h1>Without FOUC</h1>
-            <p>With 4 lines of CSS, this is resolved</p>
+            <p>With 9 lines of CSS, this is resolved</p>
             <p>You can view the source code <a href="https://github.com/break-stuff/css-reduced-web-component-fouc">here</a>.</p>
             <sl-alert open>
                 <sl-icon slot="icon" name="info-circle"></sl-icon>
