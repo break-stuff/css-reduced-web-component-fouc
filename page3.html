@@ -22,14 +22,42 @@
     </head>
     <body>
         <nav>
-            <a href="https://break-stuff.github.io/css-reduced-web-component-fouc/">With FOUC</a>
-            <a href="https://break-stuff.github.io/css-reduced-web-component-fouc/page2.html" aria-current="page">Without FOUC</a>
-            <a href="https://break-stuff.github.io/css-reduced-web-component-fouc/page3.html">Without FOUC - Injection</a>
+            <a
+                href="https://break-stuff.github.io/css-reduced-web-component-fouc/"
+                >With FOUC</a
+            >
+            <a
+                href="https://break-stuff.github.io/css-reduced-web-component-fouc/page2.html"
+                >Without FOUC</a
+            >
+            <a
+                href="https://break-stuff.github.io/css-reduced-web-component-fouc/page3.html"
+                aria-current="page"
+                >Without FOUC - Injection</a
+            >
         </nav>
         <main>
-            <h1>Without FOUC</h1>
-            <p>With 4 lines of CSS, this is resolved</p>
-            <p>You can view the source code <a href="https://github.com/break-stuff/css-reduced-web-component-fouc">here</a>.</p>
+            <h1>Without FOUC - Injection</h1>
+            <p>When the "Add Select Component" button is clicked, it will inject a Select component on the page. This is to demonstrate the behavior when new undefined components are added after the intial load.</p>
+            <sl-button id="add-select-btn">Add Select Component</sl-button>
+            <hr>
+            <div id="dynamic-content"></div>
+            <script>
+                document
+                    .getElementById("add-select-btn")
+                    .addEventListener("click", () => {
+                        const container =
+                            document.getElementById("dynamic-content");
+                        container.innerHTML = `
+            <sl-select label="Select one">
+              <sl-option value="option-1">Option 1</sl-option>
+              <sl-option value="option-2">Option 2</sl-option>
+              <sl-option value="option-3">Option 3</sl-option>
+            </sl-select>
+          `;
+                    });
+            </script>
+            <hr />
             <sl-alert open>
                 <sl-icon slot="icon" name="info-circle"></sl-icon>
                 This is a standard alert. You can customize its content and even
