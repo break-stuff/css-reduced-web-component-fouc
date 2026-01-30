@@ -17,6 +17,9 @@ body:has(:not(:defined)) {
 }
 ```
 
+Check out a live demo of it here:
+https://break-stuff.github.io/css-reduced-web-component-fouc/
+
 ### How It Works
 
 1. **`:not(:defined)`** - Selects any custom elements that haven't been defined yet
