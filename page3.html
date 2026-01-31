@@ -14,16 +14,16 @@
       src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"
     ></script>
     <style>
-body:has(:not(:defined)) {
-  opacity: var(--wc-loaded, 0);
-  animation: showBody 0s linear 100ms forwards;
-}
+      body:has(:not(:defined)) {
+        opacity: var(--wc-loaded, 0);
+        animation: showBody 0s linear 100ms forwards;
+      }
 
-@keyframes showBody {
-  to {
-    --wc-loaded: 1;
-  }
-}
+      @keyframes showBody {
+        to {
+          --wc-loaded: 1;
+        }
+      }
     </style>
   </head>
   <body>
