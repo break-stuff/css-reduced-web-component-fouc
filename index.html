@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <title>Home</title>
@@ -9,25 +9,23 @@
       Remove all code in `styles.css`!
     -->
     <link rel="stylesheet" href="styles.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css"
-    />
-    <script
-      type="module"
-      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"
-    ></script>
+    <script type="module" src="/main.js"></script>
   </head>
   <body>
     <nav>
-      <a href="https://break-stuff.github.io/css-reduced-web-component-fouc/" aria-current="page">With FOUC</a>
-      <a href="https://break-stuff.github.io/css-reduced-web-component-fouc/page2.html">Without FOUC</a>
-      <a href="https://break-stuff.github.io/css-reduced-web-component-fouc/page3.html">Without FOUC - Injection</a>
+      <a href="./index.html" aria-current="page">With FOUC</a>
+      <a href="./page2.html">Without FOUC</a>
+      <a href="./page3.html">Without FOUC - Injection</a>
     </nav>
     <main>
       <h1>With FOUC</h1>
       <p>These component are being lazy-loaded from a CDN.</p>
-      <p>You can view the source code <a href="https://github.com/break-stuff/css-reduced-web-component-fouc">here</a>.</p>
+      <p>
+        You can view the source code
+        <a href="https://github.com/break-stuff/css-reduced-web-component-fouc"
+          >here</a
+        >.
+      </p>
       <sl-alert open>
         <sl-icon slot="icon" name="info-circle"></sl-icon>
         This is a standard alert. You can customize its content and even the
@@ -131,13 +129,13 @@
       </div>
 
       <script>
-        const container = document.querySelector('.details-group-example');
+        const container = document.querySelector(".details-group-example");
 
         // Close all other details when one is shown
-        container.addEventListener('sl-show', (event) => {
-          if (event.target.localName === 'sl-details') {
-            [...container.querySelectorAll('sl-details')].map(
-              (details) => (details.open = event.target === details)
+        container.addEventListener("sl-show", (event) => {
+          if (event.target.localName === "sl-details") {
+            [...container.querySelectorAll("sl-details")].map(
+              (details) => (details.open = event.target === details),
             );
           }
         });
@@ -158,12 +156,12 @@
       <sl-button>Open Dialog</sl-button>
 
       <script>
-        const dialog = document.querySelector('.dialog-overview');
+        const dialog = document.querySelector(".dialog-overview");
         const openButton = dialog.nextElementSibling;
         const closeButton = dialog.querySelector('sl-button[slot="footer"]');
 
-        openButton.addEventListener('click', () => dialog.show());
-        closeButton.addEventListener('click', () => dialog.hide());
+        openButton.addEventListener("click", () => dialog.show());
+        closeButton.addEventListener("click", () => dialog.hide());
       </script>
       <hr />
       <sl-drawer label="Drawer" class="drawer-overview">
@@ -174,14 +172,14 @@
       <sl-button>Open Drawer</sl-button>
 
       <script>
-        const drawer = document.querySelector('.drawer-overview');
+        const drawer = document.querySelector(".drawer-overview");
         const openButton = drawer.nextElementSibling;
         const closeButton = drawer.querySelector(
-          'sl-button[variant="primary"]'
+          'sl-button[variant="primary"]',
         );
 
-        openButton.addEventListener('click', () => drawer.show());
-        closeButton.addEventListener('click', () => drawer.hide());
+        openButton.addEventListener("click", () => drawer.show());
+        closeButton.addEventListener("click", () => drawer.hide());
       </script>
 
       <hr />
@@ -227,15 +225,15 @@
       </div>
 
       <script>
-        const container = document.querySelector('.qr-overview');
-        const qrCode = container.querySelector('sl-qr-code');
-        const input = container.querySelector('sl-input');
+        const container = document.querySelector(".qr-overview");
+        const qrCode = container.querySelector("sl-qr-code");
+        const input = container.querySelector("sl-input");
 
-        customElements.whenDefined('sl-qr-code').then(() => {
+        customElements.whenDefined("sl-qr-code").then(() => {
           input.value = qrCode.value;
           input.addEventListener(
-            'sl-input',
-            () => (qrCode.value = input.value)
+            "sl-input",
+            () => (qrCode.value = input.value),
           );
         });
       </script>

@@ -5,20 +5,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="styles.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css"
-    />
-    <script
-      type="module"
-      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"
-    ></script>
+    <script type="module" src="/main.js"></script>
     <style>
-      body:has(:not(:defined)) {
-        opacity: var(--wc-loaded, 0);
-        animation: showBody 0s linear 100ms forwards;
+      /* must define property to work properly for all browsers */
+      @property --wc-loaded {
+        syntax: "<number>";
+        inherits: true;
+        initial-value: 0;
       }
 
+      body {
+        /* start timeout regardless if there are undefined components */
+        animation: showBody 0s linear 100ms forwards;
+
+        /* hide for until components are defined or 100ms - whichever comes first */
+        &:has(:not(:defined)) {
+          opacity: var(--wc-loaded, 0);
+        }
+      }
+
+      /* update variable to prevent opactity flash for subsequent component loads */
       @keyframes showBody {
         to {
           --wc-loaded: 1;
@@ -28,18 +34,9 @@
   </head>
   <body>
     <nav>
-      <a href="https://break-stuff.github.io/css-reduced-web-component-fouc/"
-        >With FOUC</a
-      >
-      <a
-        href="https://break-stuff.github.io/css-reduced-web-component-fouc/page2.html"
-        >Without FOUC</a
-      >
-      <a
-        href="https://break-stuff.github.io/css-reduced-web-component-fouc/page3.html"
-        aria-current="page"
-        >Without FOUC - Injection</a
-      >
+      <a href="./index.html">With FOUC</a>
+      <a href="./page2.html">Without FOUC</a>
+      <a href="./page3.html" aria-current="page">Without FOUC - Injection</a>
     </nav>
     <main>
       <h1>Without FOUC - Injection</h1>
@@ -49,23 +46,14 @@
         new undefined components are added after the intial load.
       </p>
       <sl-button id="add-select-btn">Add Select Component</sl-button>
+      <p>
+        This will append an unknown element to body so you can see how it is
+        handled.
+      </p>
+      <sl-button id="add-unknown-btn">Add Unknown Element</sl-button>
       <some-element></some-element>
       <hr />
       <div id="dynamic-content"></div>
-      <script>
-        document
-          .getElementById("add-select-btn")
-          .addEventListener("click", () => {
-            const container = document.getElementById("dynamic-content");
-            container.innerHTML = `
-            <sl-select label="Select one">
-              <sl-option value="option-1">Option 1</sl-option>
-              <sl-option value="option-2">Option 2</sl-option>
-              <sl-option value="option-3">Option 3</sl-option>
-            </sl-select>
-          `;
-          });
-      </script>
       <hr />
       <sl-alert open>
         <sl-icon slot="icon" name="info-circle"></sl-icon>

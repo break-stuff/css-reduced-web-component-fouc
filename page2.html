@@ -5,41 +5,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="styles.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css"
-    />
-    <script
-      type="module"
-      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"
-    ></script>
+    <script type="module" src="/main.js"></script>
     <style>
-      body:has(:not(:defined)) {
-        opacity: var(--wc-loaded, 0);
-        animation: showBody 0s linear 100ms forwards;
-      }
+/* must define property to work properly for all browsers */
+@property --wc-loaded {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
 
-      @keyframes showBody {
-        to {
-          --wc-loaded: 1;
-        }
-      }
+body {
+  /* start timeout regardless if there are undefined components */
+  animation: showBody 0s linear 100ms forwards;
+  
+  /* hide for until components are defined or 100ms - whichever comes first */
+  &:has(:not(:defined)) {
+    opacity: var(--wc-loaded, 0);
+  }
+}
+
+/* update variable to prevent opactity flash for subsequent component loads */
+@keyframes showBody {
+  to {
+    --wc-loaded: 1;
+  }
+}
     </style>
   </head>
   <body>
     <nav>
-      <a href="https://break-stuff.github.io/css-reduced-web-component-fouc/"
-        >With FOUC</a
-      >
-      <a
-        href="https://break-stuff.github.io/css-reduced-web-component-fouc/page2.html"
-        aria-current="page"
-        >Without FOUC</a
-      >
-      <a
-        href="https://break-stuff.github.io/css-reduced-web-component-fouc/page3.html"
-        >Without FOUC - Injection</a
-      >
+      <a href="./index.html">With FOUC</a>
+      <a href="./page2.html" aria-current="page">Without FOUC</a>
+      <a href="./page3.html">Without FOUC - Injection</a>
     </nav>
     <main>
       <h1>Without FOUC</h1>
@@ -50,6 +47,13 @@
           >here</a
         >.
       </p>
+
+      <sl-button id="add-unknown-btn">Add Unknown Element</sl-button>
+      <p>
+        This will append an unknown element to body so you can see how it is
+        handled.
+      </p>
+
       <sl-alert open>
         <sl-icon slot="icon" name="info-circle"></sl-icon>
         This is a standard alert. You can customize its content and even the
